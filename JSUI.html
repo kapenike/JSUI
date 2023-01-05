@@ -1,0 +1,102 @@
+<style>
+html, body, canvas {
+	width: 100%; height: 100%; padding: 0; margin: 0;
+}
+</style>
+<script>
+// convert into class after i read how to use classes
+var JSUI = new function JSUI() {
+
+	this.STYLESHEET = {}
+	this.ID_REFS = {}
+	this.DOM = []
+	this.FPS = 1000
+	this.DI = null
+	this.CANVAS = null
+	this.CTX = null
+	this.CX = 0
+	this.CY = 0
+	
+	this.displayUI = () => {
+		
+		//display on canvas
+		
+		
+	}
+	
+	this.style = (x) => {
+		Object.keys(x).forEach(v => {
+			if (this.STYLESHEET?.[v]) {
+				Object.assign(this.STYLESHEET, x[v])
+			} else {
+				this.STYLESHEET[v] = x[v]
+			}
+		})
+	}
+	
+	this.importToDom = (x) => {
+		this.DOM = this.DOM.concat(x)
+		return true
+	}
+
+	this.UI_RULES = {
+		append: ['DOM', this.importToDom]
+	}
+	// event chain must return truthy to continue through UI_RULES (.every)
+	this.ui = (...x) => {
+		return this.UI_RULES?.[x[0]].every((v,i) => {
+			var condition = typeof v
+			if (condition === 'string') {
+				// eventually allow more than one option so we can append to more than just DOM, like ID, element references, etc
+				return this.UI_RULES[x[0]][i] == x[i+1]
+			} else if (condition === 'function') {
+				// will cause issues if event chain goes past a function call .... hmm
+				return this.UI_RULES[x[0]][i](x[i+1])
+			}
+		}) ?? null
+	}
+	
+	this.init = () => {
+		this.CANVAS = document.createElement('canvas')
+		this.CANVAS.width = screen.width
+		this.CX = screen.width
+		this.CANVAS.height = screen.height
+		this.CY = screen.width
+		document.body.appendChild(this.CANVAS)
+		this.CTX = this.CANVAS.getContext('2d')
+		this.DI = setInterval(this.displayUI, this.FPS)
+	}
+	
+	window.addEventListener('DOMContentLoaded', this.init)
+	// resize window reset W/H vars
+}
+
+JSUI.style({
+	'#test': {
+		backgroundColor: '#000000',
+		width: '50%',
+		height: '50%',
+		position: 'absolute',
+		position_center: 'center',
+		left: '50%',
+		top: '50%'
+	},
+	'.test': {
+		color: '#ffffff'
+	}
+});
+
+JSUI.ui('append','DOM',[
+	{
+		e: 'div',
+		id: 'test',
+		className: 'test',
+		style: {
+			fontSize: '12px'
+		},
+		text: 'pretty cool concept huh? you guys should help meh',
+		children: []
+	}
+]);
+
+</script>
