@@ -1,5 +1,6 @@
 # JSUI
 Base methods for generating and manipulating HTML with vanilla javascript
+
 O: create an element | P: select, modify and return element | U: select, modify and return group of elements
 
 ```
