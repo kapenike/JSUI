@@ -70,7 +70,16 @@ document.body.appendChild(
 							textDecoration: 'underline'
 						}
 					});
-					P('#title').innerHTML = this.dataset.some_stored_data;
+					P('#title', {
+						innerHTML: this.dataset.some_stored_data
+					}).prepend(
+						O('div', {
+							style: {
+								fontSize: '10px'
+							},
+							innerHTML: 'inserted via selection'
+						})
+					);
 				},
 				dataset: {
 					some_stored_data: 'Welcome to Vanilla JavaScript',
