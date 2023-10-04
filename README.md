@@ -13,7 +13,7 @@ var P = function (selector, obj = {}) {
 var U = function (selector, obj = {}) {
 	return Object.keys(obj).length === 0
 		? document.querySelectorAll(selector)
-		: Array.from(document.querySelectorAll(selector)).forEach(x =>
+		: document.querySelectorAll(selector).forEach(x =>
 			O(x, obj, true)
 		)
 }
