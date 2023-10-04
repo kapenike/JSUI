@@ -5,7 +5,7 @@ O: create an element | P: select, modify and return element | U: select, modify 
 
 ```
 var P = function (selector, obj = {}) {
-	return Object.keys(obj).length
+	return Object.keys(obj).length === 0
 		? document.querySelector(selector)
 		: O(document.querySelector(selector), obj, true)
 }
