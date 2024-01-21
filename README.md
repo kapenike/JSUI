@@ -1,9 +1,11 @@
 # JSUI
 Base methods for generating and manipulating HTML with vanilla javascript
 
-Create: create an element
-Select: select, modify and return element
-MSelect: select, modify and return group of elements
+**Create:** create an element
+
+**Select:** select, modify and return element
+
+**MSelect:** select, modify and return group of elements
 
 ```
 var Select = function (selector, obj = {}) {
