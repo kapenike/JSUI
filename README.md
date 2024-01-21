@@ -1,31 +1,33 @@
 # JSUI
 Base methods for generating and manipulating HTML with vanilla javascript
 
-O: create an element | P: select, modify and return element | U: select, modify and return group of elements
+Create: create an element
+Select: select, modify and return element
+MSelect: select, modify and return group of elements
 
 ```
-var P = function (selector, obj = {}) {
+var Select = function (selector, obj = {}) {
 	return Object.keys(obj).length === 0
 		? document.querySelector(selector)
-		: O(document.querySelector(selector), obj, true)
+		: Create(document.querySelector(selector), obj, true)
 }
 
-var U = function (selector, obj = {}) {
+var MSelect = function (selector, obj = {}) {
 	return Object.keys(obj).length === 0
 		? document.querySelectorAll(selector)
 		: document.querySelectorAll(selector).forEach(x =>
-			O(x, obj, true)
+			Create(x, obj, true)
 		)
 }
 
-var O = function (node, obj = {}, h = false) {
+var Create = function (node, obj = {}, isNode = false) {
 	return Object.keys(obj).reduce((x, c) =>
 		Array.isArray(obj[c])
-			? obj[c].forEach(y => x.appendChild(y)) ?? x
+			? obj[c].forEach(y => x.appendChild(y)) || x
 			: typeof obj[c] === 'object'
 				? null & Object.assign(x[c], obj[c]) || x
 				: Object.assign(x, { [c]: obj[c] })
-	, h ? node : document.createElement(node));
+	, isNode ? node : document.createElement(node));
 }
 ```
 
@@ -33,7 +35,7 @@ var O = function (node, obj = {}, h = false) {
 
 ```
 document.body.appendChild(
-	O('div', {
+	Create('div', {
 		id: 'main',
 		className: 'body',
 		style: {
@@ -46,34 +48,34 @@ document.body.appendChild(
 			fontFamily: 'Arial',
 			margin: '0 auto'
 		},
-		this_name_doesnt_matter_just_the_data_type: [
-			O('h1', {
+		children: [
+			Create('h1', {
 				innerHTML: 'Welcome to JSUI',
 				id: 'title',
 				color: '#222222'
 			}),
-			O('p', {
+			Create('p', {
 				innerHTML: 'This library will remain as simple as possible to decrease the amount of characters I have to type while manipulating the DOM with vanilla JavaScript.',
 				style: {
 					color: '#444444'
 				}
 			}),
-			O('button', {
+			Create('button', {
 				innerHTML: 'Click to do stuff',
 				style: {
 					marginBottom: '10px'
 				},
 				onclick: function () {
-					U('div', {
+					MSelect('div', {
 						style: {
 							color: '#c30010',
 							textDecoration: 'underline'
 						}
 					});
-					P('#title', {
+					Select('#title', {
 						innerHTML: this.dataset.some_stored_data
 					}).prepend(
-						O('div', {
+						Create('div', {
 							style: {
 								fontSize: '10px'
 							},
