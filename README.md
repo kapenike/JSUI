@@ -23,7 +23,7 @@ var MSelect = function (selector, obj = {}) {
 		? document.querySelectorAll(selector)
 		: document.querySelectorAll(selector).forEach(x =>
 			Create(x, obj, true)
-		)
+		) || document.querySelectorAll(selector)
 }
 
 var Create = function (node, obj = {}, isNode = false) {
@@ -57,7 +57,9 @@ document.body.appendChild(
 			Create('h1', {
 				innerHTML: 'Welcome to JSUI',
 				id: 'title',
-				color: '#222222'
+				style: {
+					color: '#222222'
+				}
 			}),
 			Create('p', {
 				innerHTML: 'This library will remain as simple as possible to decrease the amount of characters I have to type while manipulating the DOM with vanilla JavaScript.',
@@ -112,13 +114,14 @@ var Select = function (selector, obj = {}) {
 selector: valid css selector string
 obj: object properties to assign to the selected node list before returning
 	(if no obj is defined, just return the node list)
+... .forEach has no return value so, query again after changes for the return value
 */
 var MSelect = function (selector, obj = {}) {
 	return Object.keys(obj).length === 0
 		? document.querySelectorAll(selector)
 		: document.querySelectorAll(selector).forEach(x =>
 			Create(x, obj, true)
-		)
+		) || document.querySelectorAll(selector)
 }
 
 /*
