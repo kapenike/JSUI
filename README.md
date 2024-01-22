@@ -75,7 +75,7 @@ document.body.appendChild(
 						}
 					});
 					Select('#title', {
-						innerHTML: this.dataset.some_stored_data
+						innerHTML: this.data
 					}).prepend(
 						Create('div', {
 							style: {
@@ -85,9 +85,7 @@ document.body.appendChild(
 						})
 					);
 				},
-				dataset: {
-					some_stored_data: 'Welcome to Vanilla JavaScript',
-				}
+				data: 'Welcome to Vanilla JavaScript'
 			})
 		]
 	})
