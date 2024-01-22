@@ -12,7 +12,7 @@ var MSelect = function (selector, obj = {}) {
 		? document.querySelectorAll(selector)
 		: document.querySelectorAll(selector).forEach(x =>
 			Create(x, obj, true)
-		)
+		) || document.querySelectorAll(selector)
 }
 
 var Create = function (node, obj = {}, isNode = false) {
@@ -44,7 +44,9 @@ document.body.appendChild(
 			Create('h1', {
 				innerHTML: 'Welcome to JSUI',
 				id: 'title',
-				color: '#222222'
+				style: {
+					color: '#222222'
+				}
 			}),
 			Create('p', {
 				innerHTML: 'This library will remain as simple as possible to decrease the amount of characters I have to type while manipulating the DOM with vanilla JavaScript.',
