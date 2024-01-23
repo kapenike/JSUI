@@ -54,6 +54,26 @@ document.body.appendChild(
 					color: '#444444'
 				}
 			}),
+			Create('ul', {
+				style: {
+					fontWeight: 'bold',
+					textAlign: 'left'
+				},
+				innerHTML: 'These list elements are created from a data source',
+				children: [
+					'JavaScript is the best',
+					'And even better when combined with functional programming',
+					'Why would we still use bloated libraries?'
+				].map(x => {
+					return Create('li', {
+						style: {
+							fontWeight: 'normal',
+							marginLeft: '40px'
+						},
+						innerHTML: x
+					});
+				})
+			}),
 			Create('button', {
 				innerHTML: 'Click to do stuff',
 				style: {
@@ -62,8 +82,7 @@ document.body.appendChild(
 				onclick: function () {
 					MSelect('div', {
 						style: {
-							color: '#c30010',
-							textDecoration: 'underline'
+							color: '#c30010'
 						}
 					});
 					Select('#title', {
