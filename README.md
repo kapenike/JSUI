@@ -37,6 +37,11 @@ var Create = function (node, obj = {}, isNode = false) {
 }
 ```
 
+## Minified via minify-js.com
+```
+var Select=function(e,t={}){return 0===Object.keys(t).length?document.querySelector(e):Create(document.querySelector(e),t,!0)},MSelect=function(e,t={}){return 0===Object.keys(t).length?document.querySelectorAll(e):document.querySelectorAll(e).forEach((e=>Create(e,t,!0)))||document.querySelectorAll(e)},Create=function(e,t={},r=!1){return Object.keys(t).reduce(((e,r)=>Array.isArray(t[r])?t[r].forEach((t=>e.appendChild(t)))||e:"object"==typeof t[r]?null&Object.assign(e[r],t[r])||e:Object.assign(e,{[r]:t[r]})),r?e:document.createElement(e))};
+```
+
 ## Example
 ```
 document.body.appendChild(
